@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
+// 6588
 public class Goldbach {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -12,18 +13,17 @@ public class Goldbach {
         boolean[] isPrime = new boolean[MAX + 1];
         Arrays.fill(isPrime, true);
 
-        for(int i = 2; i <= MAX; i++) {
-            for(int j = i * 2; j <= MAX; j += i) {
-                if(!isPrime[j]) {
-                    continue;
+        // 에라토스테네스의 체
+        for (int i = 2; i * i <= MAX; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j <= MAX; j += i) {
+                    isPrime[j] = false;
                 }
-                isPrime[j] = false;
             }
         }
 
         while(true) {
             int targetNumber = Integer.valueOf(br.readLine());
-
             if(targetNumber == 0) {
                 break;
             }
